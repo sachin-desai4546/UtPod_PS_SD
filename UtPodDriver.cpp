@@ -1,4 +1,4 @@
-/* utPod_driver.cpp
+/* UtPodDriver.cpp
 Demo Driver for the UtPod.
 
 Roger Priebe

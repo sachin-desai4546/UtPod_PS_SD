@@ -64,7 +64,7 @@ UtPod::void shuffle();
 
  output parms -
 */
-UtPpod::void showSongList();
+UtPod::void showSongList();
 
 
 /* FUNCTION - void sortSongList

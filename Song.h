@@ -2,14 +2,36 @@
 
 //DOCUMENT HERE
 
-#ifndef UTPOD_H
-#define UTPOD_H
+#ifndef SONG_H
+#define SONG_H
 #include "Song.h"
+#include <string>
 
-//UtPod class declaration
-class Song
-{
+using namespace std;
 
+//Song class declaration
+class Song {
+
+    private:
+        string title;
+        string artist;
+        int size;
+
+    public:
+        void setTitle(string title);
+        void setArtist(string artist);
+        void setSize(int size);
+        string getTitle() const {
+            return title;
+        };
+        string getArtist() const {
+            return artist;
+        };
+        int getSize() const{
+            return size;
+        };
+
+    ~Song();
 };
 
 

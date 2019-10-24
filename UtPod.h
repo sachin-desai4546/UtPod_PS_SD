@@ -30,7 +30,9 @@ class UtPod
    public:
       //Default constructor
       //set the memory size to MAX_MEMORY
-      UtPod();
+      UtPod() {
+          memSize = MAX_MEMORY;
+      };
 
       //Constructor with size parameter
       //The user of the class will pass in a size.

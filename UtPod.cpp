@@ -5,9 +5,7 @@
 #include "UtPod.h"
 #include "Song.h"
 
-//UtPod class declaration
-//Default constructor
-// set the memory size to MAX_MEMORY
+using namespace std;
 
 //Constructor with size parameter
 // The user of the class will pass in a size.
@@ -28,7 +26,9 @@ UtPod::UtPod(int size) {
 
  output parms -
 */
-UtPod::int addSong(Song const &s);
+int UtPod::addSong(Song const &s){
+    return;
+};
 
 
 /* FUNCTION - int removeSong
@@ -42,7 +42,9 @@ UtPod::int addSong(Song const &s);
 
  output parms -
 */
-UtPod::int removeSong(Song const &s);
+int UtPod::removeSong(Song const &s){
+
+};
 
 
 /* FUNCTION - void shuffle
@@ -53,7 +55,9 @@ UtPod::int removeSong(Song const &s);
 
  output parms -
 */
-UtPod::void shuffle();
+void UtPod::shuffle(){
+
+};
 
 
 /* FUNCTION - void showSongList
@@ -64,7 +68,9 @@ UtPod::void shuffle();
 
  output parms -
 */
-UtPod::void showSongList();
+void UtPod::showSongList(){
+
+};
 
 
 /* FUNCTION - void sortSongList
@@ -75,7 +81,9 @@ UtPod::void showSongList();
 
  output parms -
 */
-UtPod::void sortSongList();
+void UtPod::sortSongList(){
+
+};
 
 /* FUNCTION - void clearMemory
  * clears all the songs from memory
@@ -84,20 +92,9 @@ UtPod::void sortSongList();
 
  output parms -
 */
-UtPod::void clearMemory();
+void UtPod::clearMemory(){
 
-
-/* FUNCTION - int getTotalMemory
- *  returns the total amount of memory in the UtPod
- o will do nothing if there are less than two songs in the current list
-
- input parms -
-
- output parms -
-*/
-UtPod::int getTotalMemory() {
-    return memSize;
-}
+};
 
 
 
@@ -107,4 +104,6 @@ UtPod::int getTotalMemory() {
 
  output parms -
 */
-UtPod::int getRemainingMemory();
+int UtPod::getRemainingMemory(){
+
+};

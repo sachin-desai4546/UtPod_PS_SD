@@ -7,6 +7,10 @@
 
 using namespace std;
 
+UtPod::UtPod() {
+    memSize = MAX_MEMORY;
+};
+
 //Constructor with size parameter
 // The user of the class will pass in a size.
 //If the size is greater than MAX_MEMORY or less than or equal to 0,
@@ -26,7 +30,7 @@ UtPod::UtPod(int size) {
 
  output parms -
 */
-int UtPod::addSong(Song const &s){
+void UtPod::addSong(Song const &s){
     return;
 };
 
@@ -107,3 +111,5 @@ void UtPod::clearMemory(){
 int UtPod::getRemainingMemory(){
 
 };
+
+UtPod::~UtPod();

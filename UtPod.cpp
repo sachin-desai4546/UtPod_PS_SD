@@ -8,6 +8,7 @@
 using namespace std;
 
 UtPod::UtPod() {
+    songs -> next = NULL;
     memSize = MAX_MEMORY;
 };
 
@@ -30,9 +31,9 @@ UtPod::UtPod(int size) {
 
  output parms -
 */
-void UtPod::addSong(Song const &s){
-    return;
-};
+int UtPod::addSong(Song const &s){
+    return(1);
+}
 
 
 /* FUNCTION - int removeSong
@@ -47,8 +48,8 @@ void UtPod::addSong(Song const &s){
  output parms -
 */
 int UtPod::removeSong(Song const &s){
-
-};
+    return 0;
+}
 
 
 /* FUNCTION - void shuffle
@@ -61,7 +62,7 @@ int UtPod::removeSong(Song const &s){
 */
 void UtPod::shuffle(){
 
-};
+}
 
 
 /* FUNCTION - void showSongList
@@ -74,7 +75,7 @@ void UtPod::shuffle(){
 */
 void UtPod::showSongList(){
 
-};
+}
 
 
 /* FUNCTION - void sortSongList
@@ -87,7 +88,7 @@ void UtPod::showSongList(){
 */
 void UtPod::sortSongList(){
 
-};
+}
 
 /* FUNCTION - void clearMemory
  * clears all the songs from memory
@@ -98,7 +99,7 @@ void UtPod::sortSongList(){
 */
 void UtPod::clearMemory(){
 
-};
+}
 
 
 
@@ -109,7 +110,7 @@ void UtPod::clearMemory(){
  output parms -
 */
 int UtPod::getRemainingMemory(){
+    return 1;
+}
 
-};
-
-UtPod::~UtPod();
+UtPod::~UtPod(){}

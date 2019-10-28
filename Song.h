@@ -4,7 +4,6 @@
 
 #ifndef SONG_H
 #define SONG_H
-#include "Song.h"
 #include <string>
 
 using namespace std;
@@ -18,19 +17,19 @@ class Song {
         int size;
 
     public:
+        Song();
         void setTitle(string title);
         void setArtist(string artist);
         void setSize(int size);
         string getTitle() const {
             return title;
-        };
+        }
         string getArtist() const {
             return artist;
-        };
-        int getSize() const{
+        }
+        int getSize() const {
             return size;
-        };
-
+        }
     ~Song();
 };
 

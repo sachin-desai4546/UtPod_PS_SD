@@ -49,7 +49,6 @@ class UtPod
 
        output parms -
       */
-
       int addSong(Song const &s);
 
 
@@ -64,7 +63,6 @@ class UtPod
 
          output parms -
       */
-
       int removeSong(Song const &s);
 
 
@@ -76,7 +74,6 @@ class UtPod
 
          output parms -
       */
-
       void shuffle();
 
 
@@ -88,7 +85,6 @@ class UtPod
 
          output parms -
       */
-
       void showSongList();
 
 
@@ -100,7 +96,6 @@ class UtPod
 
          output parms -
       */
-
       void sortSongList();
 
 
@@ -122,7 +117,6 @@ class UtPod
 
          output parms -
       */
-
       int getTotalMemory() {
          return memSize;
       }
@@ -136,7 +130,6 @@ class UtPod
 
          output parms -
       */
-
       int getRemainingMemory();
 
 

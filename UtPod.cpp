@@ -4,6 +4,7 @@
 
 #include "UtPod.h"
 #include "Song.h"
+#include <string>
 
 using namespace std;
 
@@ -17,7 +18,11 @@ UtPod::UtPod() {
 //If the size is greater than MAX_MEMORY or less than or equal to 0,
 // set the size to MAX_MEMORY.
 UtPod::UtPod(int size) {
-
+    if ((size > MAX_MEMORY) || (size <= 0)){
+        memSize = MAX_MEMORY;
+    } else {
+        memSize = size;
+    }
 };
 
 /* FUNCTION - int addSong
@@ -32,7 +37,15 @@ UtPod::UtPod(int size) {
  output parms -
 */
 int UtPod::addSong(Song const &s){
-    return(1);
+    if (Song::getSize(s) < getRemainingMemory()){
+        SongNode *temp = new SongNode;
+        temp -> s = s;
+        temp -> next = songs;
+        songs = temp;
+        return 0;
+    } else {
+        return -1;
+    }
 }
 
 
@@ -48,7 +61,20 @@ int UtPod::addSong(Song const &s){
  output parms -
 */
 int UtPod::removeSong(Song const &s){
-    return 0;
+    int count = 0;
+    SongNode *temp = songs;
+    SongNode *temp1;
+    temp1 -> next = temp;
+    while (temp1 -> next != NULL){
+        if ((Song::compareSize(temp -> s, s) == 0) && (Song::compareTitle(temp -> s, s) == 0) && (Song::compareArtist(temp -> s, s) == 0) && (count == 0)){
+            temp1 -> next = temp -> next;
+            delete temp;
+            count++;
+        }
+        temp1 = temp1 -> next;
+        temp = temp -> next;
+    }
+
 }
 
 
@@ -74,7 +100,18 @@ void UtPod::shuffle(){
  output parms -
 */
 void UtPod::showSongList(){
-
+    string title;
+    string artist;
+    SongNode *temp = songs;
+    while (temp -> next != NULL){
+        title = Song::getTitle(temp -> s);
+        artist = Song::getArtist(temp -> s);
+        cout << title << " by " << artist << endl;
+        temp = temp -> next;
+    }
+    title = Song::getTitle(temp -> s);
+    artist = Song::getArtist(temp -> s);
+    cout << title << " by " << artist << endl;
 }
 
 
@@ -86,8 +123,7 @@ void UtPod::showSongList(){
 
  output parms -
 */
-void UtPod::sortSongList(){
-
+void UtPod::sortSongList() {
 }
 
 /* FUNCTION - void clearMemory
@@ -98,7 +134,15 @@ void UtPod::sortSongList(){
  output parms -
 */
 void UtPod::clearMemory(){
-
+    SongNode *temp = songs;
+    SongNode *temp1 = songs;
+    while (temp -> next != NULL){
+        temp1 = temp -> next;
+        delete temp;
+        temp = temp1;
+    }
+    temp1 = temp -> next;
+    delete temp;
 }
 
 
@@ -110,7 +154,14 @@ void UtPod::clearMemory(){
  output parms -
 */
 int UtPod::getRemainingMemory(){
-    return 1;
+    int total;
+    SongNode *temp = songs;
+    while (temp -> next != NULL){
+        total += Song::getSize(temp -> s);
+        temp = temp -> next;
+    }
+    total += Song::getSize(temp -> s);
+    return (memSize - total);
 }
 
 UtPod::~UtPod(){}

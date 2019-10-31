@@ -26,6 +26,7 @@ class UtPod
       SongNode *songs;  //the head pointer
       
       int memSize;
+      int randSeed;
    
    public:
       //Default constructor
@@ -131,6 +132,8 @@ class UtPod
          output parms -
       */
       int getRemainingMemory();
+
+      void songSwap(Song &s0, Song &s1);
 
 
       ~UtPod();

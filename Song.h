@@ -18,15 +18,17 @@ class Song {
 
     public:
         Song();
-        void setTitle(string _title);
-        void setArtist(string _artist);
-        void setSize(int _size);
+        Song(string artist, string title, int size);
+        void setTitle(string title);
+        void setArtist(string artist);
+        void setSize(int size);
         static string getTitle(const Song &s);
         static string getArtist(const Song &s);
         static int getSize(const Song &s);
-        static int compareArtist(const Song &s, const Song &s1);
-        static int compareTitle(const Song &s, const Song &s1);
-        static int compareSize(const Song &s, const Song &s1);
+        bool operator >(const Song &s);
+        bool operator <(const Song &s);
+        bool operator ==(const Song &s);
+        void songSwap(Song &s0, Song &s1);
     ~Song();
 };
 

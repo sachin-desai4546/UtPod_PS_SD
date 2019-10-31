@@ -9,8 +9,9 @@
 using namespace std;
 
 UtPod::UtPod() {
-    songs -> next = NULL;
+    songs = NULL;
     memSize = MAX_MEMORY;
+    randSeed = 1;
 };
 
 //Constructor with size parameter
@@ -37,7 +38,7 @@ UtPod::UtPod(int size) {
  output parms -
 */
 int UtPod::addSong(Song const &s){
-    if (Song::getSize(s) < getRemainingMemory()){
+    if ((songs == NULL && Song::getSize(s) < memSize) || Song::getSize(s) < getRemainingMemory()){
         SongNode *temp = new SongNode;
         temp -> s = s;
         temp -> next = songs;
@@ -62,19 +63,40 @@ int UtPod::addSong(Song const &s){
 */
 int UtPod::removeSong(Song const &s){
     int count = 0;
-    SongNode *temp = songs;
-    SongNode *temp1;
-    temp1 -> next = temp;
-    while (temp1 -> next != NULL){
-        if ((Song::compareSize(temp -> s, s) == 0) && (Song::compareTitle(temp -> s, s) == 0) && (Song::compareArtist(temp -> s, s) == 0) && (count == 0)){
-            temp1 -> next = temp -> next;
-            delete temp;
-            count++;
-        }
-        temp1 = temp1 -> next;
-        temp = temp -> next;
-    }
+    SongNode *currentLoc = songs;
+    SongNode *nextLoc = songs -> next;
+    SongNode *previousLoc = songs;
 
+    while (currentLoc -> next != NULL){
+        if (currentLoc -> s == s){
+            if(currentLoc == songs){
+                songs = nextLoc;
+                delete currentLoc;
+                return 0;
+            }else{
+                previousLoc -> next = currentLoc -> next;
+                delete currentLoc;
+                return 0;
+
+            }
+
+        }
+        nextLoc = nextLoc -> next;
+        currentLoc = currentLoc -> next;
+        if(count > 0){
+            previousLoc = previousLoc -> next;
+        }
+        count++;
+    }
+    if(currentLoc -> s == s){
+        if(songs -> next == NULL){
+            songs = NULL;
+        }
+        previousLoc -> next = NULL;
+        delete currentLoc;
+        return 0;
+    }
+    return -1;
 }
 
 
@@ -103,15 +125,24 @@ void UtPod::showSongList(){
     string title;
     string artist;
     SongNode *temp = songs;
-    while (temp -> next != NULL){
-        title = Song::getTitle(temp -> s);
-        artist = Song::getArtist(temp -> s);
-        cout << title << " by " << artist << endl;
-        temp = temp -> next;
+    if(songs == NULL){
+        cout << "no songs" << endl;
+        return;
     }
-    title = Song::getTitle(temp -> s);
-    artist = Song::getArtist(temp -> s);
-    cout << title << " by " << artist << endl;
+    while (temp->next != NULL) {
+        title = Song::getTitle(temp->s);
+        artist = Song::getArtist(temp->s);
+        cout << title << " by " << artist << endl;
+        temp = temp->next;
+    }
+    title = Song::getTitle(temp->s);
+    artist = Song::getArtist(temp->s);
+    if(title == "" || artist == ""){
+        cout << "no songs" << endl;
+    } else{
+        cout << title << " by " << artist << endl;
+    }
+
 }
 
 
@@ -124,6 +155,7 @@ void UtPod::showSongList(){
  output parms -
 */
 void UtPod::sortSongList() {
+
 }
 
 /* FUNCTION - void clearMemory
@@ -154,7 +186,7 @@ void UtPod::clearMemory(){
  output parms -
 */
 int UtPod::getRemainingMemory(){
-    int total;
+    int total = 0;
     SongNode *temp = songs;
     while (temp -> next != NULL){
         total += Song::getSize(temp -> s);
@@ -164,4 +196,6 @@ int UtPod::getRemainingMemory(){
     return (memSize - total);
 }
 
-UtPod::~UtPod(){}
+UtPod::~UtPod(){
+    clearMemory();
+}

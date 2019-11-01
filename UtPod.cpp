@@ -1,10 +1,11 @@
 #include <iostream>
+#include <string>
+#include <cstdlib>
 
 //DOCUMENT HERE
 
 #include "UtPod.h"
 #include "Song.h"
-#include <string>
 
 using namespace std;
 
@@ -28,8 +29,8 @@ UtPod::UtPod(int size) {
 
 /* FUNCTION - int addSong
  * * attempts to add a new song to the UtPod
- o returns a 0 if successful
- o returns -1 if not enough memory to add the song
+ o returns a SUCCESS if successful
+ o returns NO_MEMORY if not enough memory to add the song
 
  precondition: s is a valid Song
 
@@ -43,9 +44,9 @@ int UtPod::addSong(Song const &s){
         temp -> s = s;
         temp -> next = songs;
         songs = temp;
-        return 0;
+        return SUCCESS;
     } else {
-        return -1;
+        return NO_MEMORY;
     }
 }
 
@@ -53,8 +54,8 @@ int UtPod::addSong(Song const &s){
 /* FUNCTION - int removeSong
  * * attempts to remove a song from the UtPod
  * removes the first instance of a song that is in the the UtPod multiple times
- o returns 0 if successful
- o returns -1 if nothing is removed
+ o returns SUCCESS if successful
+ o returns NOT_FOUND if nothing is removed
 
 
  input parms -
@@ -72,14 +73,12 @@ int UtPod::removeSong(Song const &s){
             if(currentLoc == songs){
                 songs = nextLoc;
                 delete currentLoc;
-                return 0;
+                return SUCCESS;
             }else{
                 previousLoc -> next = currentLoc -> next;
                 delete currentLoc;
-                return 0;
-
+                return SUCCESS;
             }
-
         }
         nextLoc = nextLoc -> next;
         currentLoc = currentLoc -> next;
@@ -94,9 +93,9 @@ int UtPod::removeSong(Song const &s){
         }
         previousLoc -> next = NULL;
         delete currentLoc;
-        return 0;
+        return SUCCESS;
     }
-    return -1;
+    return NOT_FOUND;
 }
 
 
@@ -109,6 +108,27 @@ int UtPod::removeSong(Song const &s){
  output parms -
 */
 void UtPod::shuffle(){
+    if (songs == NULL){
+        return;
+    }
+    int count = 0;
+    for (SongNode *temp = songs; temp -> next != NULL; temp = temp -> next){
+        count++;
+    }
+    count++;
+    for (int swapCount = 0; swapCount < 50; swapCount++){
+        int randNum1 = (rand() % count);
+        SongNode *Num1 = songs;
+        for (int num1Traverse = 0; num1Traverse < randNum1; num1Traverse++){
+            Num1 = Num1 -> next;
+        }
+        int randNum2 = (rand() % count);
+        SongNode *Num2 = songs;
+        for (int num2Traverse = 0; num2Traverse < randNum2; num2Traverse++){
+            Num2 = Num2 -> next;
+        }
+        Num1 -> s.songSwap(Num2 -> s);
+    }
 
 }
 
@@ -155,7 +175,17 @@ void UtPod::showSongList(){
  output parms -
 */
 void UtPod::sortSongList() {
-
+    if (songs == NULL) {
+        cout << "no songs to sort" << endl;
+        return;
+    }
+    for (SongNode *p1 = songs; p1 != NULL; p1 = p1 -> next){
+        for (SongNode *p2 = songs; p2 != NULL; p2 = p2 -> next){
+            if (p1 -> s < p2 -> s){
+                p1 -> s.songSwap(p2 -> s);
+            }
+        }
+    }
 }
 
 /* FUNCTION - void clearMemory
@@ -195,6 +225,7 @@ int UtPod::getRemainingMemory(){
     total += Song::getSize(temp -> s);
     return (memSize - total);
 }
+
 
 UtPod::~UtPod(){
     clearMemory();

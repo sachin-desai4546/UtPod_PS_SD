@@ -28,7 +28,7 @@ class Song {
         bool operator >(const Song &s);
         bool operator <(const Song &s);
         bool operator ==(const Song &s);
-        void songSwap(Song &s0, Song &s1);
+        void songSwap(Song &s);
     ~Song();
 };
 

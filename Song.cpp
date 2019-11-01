@@ -98,10 +98,16 @@ bool Song::operator ==(const Song &s){
             size == s.size);
 }
 
-void Song::songSwap(Song &s0, Song &s1) {
-    Song temp = s0;
-    s0 = s1;
-    s1 = temp;
+void Song::songSwap(Song &s) {
+    string tempTitle = title;
+    string tempArtist = artist;
+    int tempSize = size;
+    title = getTitle(s);
+    artist = getArtist(s);
+    size = getSize(s);
+    s.setTitle(tempTitle);
+    s.setArtist(tempArtist);
+    s.setSize(tempSize);
 }
 
 Song::~Song(){}

@@ -44,11 +44,19 @@ int main (int argc, char *argv[]) {
 
     t.showSongList();
 
+    t.shuffle();
+
+    t.showSongList();
+
     result = t.removeSong(s2);
     cout << "delete result = " << result << endl;
 
     result = t.removeSong(s3);
     cout << "delete result = " << result << endl;
+
+    t.showSongList();
+
+    t.sortSongList();
 
     t.showSongList();
 
@@ -61,6 +69,10 @@ int main (int argc, char *argv[]) {
     result = t.removeSong(s4);
     cout << "delete result = " << result << endl;
 
+
+    t.showSongList();
+
+    t.sortSongList();
 
     t.showSongList();
 

@@ -133,8 +133,6 @@ class UtPod
       */
       int getRemainingMemory();
 
-      void songSwap(Song &s0, Song &s1);
-
 
       ~UtPod();
  
